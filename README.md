@@ -11,6 +11,8 @@ This is a one file python application. Simply download it, make it executable
 
 Usage
 -----
+Usage:
+```
 multi_monitor_setup.py [-h] [-g] [-r] [-t] [-d] [-s [SCREEN_ORDER [SCREEN_ORDER ...]]]
 
 optional arguments:
@@ -24,7 +26,7 @@ optional arguments:
                         list of screen names in order, screens which are not
                         provided or are unavailable will be ignored. Get a
                         list of available screens using "xrandr -q".
-
+```
 Additional notes:
 - The setting to restore the background is currently not working since I always restore the background.
 - It is possible to set a standard screen order in the python source directly. This way there is no need to provide them as arguments.
@@ -34,7 +36,11 @@ Additional notes:
 - to find the names of the attached screens use "xrandr -q"
 
 A usage example would be:
+```
         multi_monitor_setup.py -t -s VGA-0 LVDS -d
+```
 This would show the xrandr command to set VGA-0 as the left monitor, and LVDS as the right monitor and aligns the top of the monitor.
+```
         multi_monitor_setup.py -s HDMI-0 LVDS VGA-0 -d
+```
 This would show the xrandr command to set HDMI-0 as the left monitor, LVDS as the middle monitor, and VGA-0 as the right monitor. The monitors will be bottom aligned.
