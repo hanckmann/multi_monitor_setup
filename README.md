@@ -1,7 +1,7 @@
 Multi Monitor Setup
 ===================
 
-Easy multi monitor setup tool for Linux. It helps when using a minimal windowmanager.
+Easy multi monitor setup tool for Linux. It helps when using a minimal windowmanager (I use i3wm and this script helps me to easily setup the various multi-monitor setups I use).
 
 Installation
 ------------
