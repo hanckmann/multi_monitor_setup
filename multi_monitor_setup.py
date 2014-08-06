@@ -11,7 +11,8 @@ def main(argv):
     restore_bg   = True
     align_bottom = True
     dry_run      = False
-    screen_order = ['VGA-0', 'LVDS']
+    screen_order = ['DP2', 'eDP1']
+    primary      = 'eDP1'
 
     # Set fixed arguments
     randr_conf      = 'xrandr'
@@ -30,6 +31,8 @@ def main(argv):
                         help='prints the settings and command to screen without performing the command')
     parser.add_argument('-s','--screen_order', action='store', default=screen_order, type=str, nargs='*',
                         help='list of screen names in order, screens which are not provided or are unavailable will be ignored. Get a list of available screens using "xrandr -q".')
+    parser.add_argument('-p','--primary', action='store', default=primary, type=str, nargs=1,
+                        help='The name of the primary screen. Get a list of available screens using "xrandr -q".')
     args = parser.parse_args(argv)
     if args.show_gui:
         show_gui = True
@@ -41,11 +44,14 @@ def main(argv):
         dry_run = True
     if args.screen_order:
         screen_order = args.screen_order
+    if args.primary:
+        primary = args.primary
     #print 'show_gui     ' + str(show_gui)
     #print 'restore_bg   ' + str(restore_bg)
     #print 'align_bottom ' + str(align_bottom)
     #print 'dry_run      ' + str(dry_run)
     #print 'screen_order ' + str(screen_order)
+    #print 'primary      ' + str(primary)
 
     # Get randr status
     p = subprocess.Popen([randr_conf, '-q'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -100,6 +106,8 @@ def main(argv):
             xy = screens[screen]
             randr_args.append('--output')
             randr_args.append(screen)
+            if screen == primary:
+                randr_args.append('--primary')
             randr_args.append('--mode')
             mode = str(xy[0]) + 'x' + str(xy[1])
             randr_args.append(mode)
