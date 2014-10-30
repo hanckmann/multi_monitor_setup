@@ -11,7 +11,7 @@ def main(argv):
     restore_bg   = True
     align_bottom = True
     dry_run      = False
-    screen_order = ['DP2', 'eDP1']
+    screen_order = ['DP2', 'DP1', 'eDP1']
     primary      = 'eDP1'
 
     # Set fixed arguments
@@ -106,8 +106,6 @@ def main(argv):
             xy = screens[screen]
             randr_args.append('--output')
             randr_args.append(screen)
-            if screen == primary:
-                randr_args.append('--primary')
             randr_args.append('--mode')
             mode = str(xy[0]) + 'x' + str(xy[1])
             randr_args.append(mode)
@@ -115,6 +113,8 @@ def main(argv):
             pos = str(from_left) + 'x' + str(from_top - xy[1])
             randr_args.append(pos)
             from_left += xy[0]
+            if screen == primary:
+                randr_args.append('--primary')
 
     # Execute
     if not dry_run:
